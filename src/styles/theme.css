@@ -1,0 +1,66 @@
+/* BESCOM — brand colors + FLUID, edge-to-edge layout */
+:root{
+  --brand-blue:#26A5DE;      /* BESCOM logo blue */
+  --navy:#0A2342;            /* dark header/navy */
+  --white:#ffffff;
+  --muted:#F3F7FF;
+  --text:#0b0f19;
+}
+
+/* reset */
+*{box-sizing:border-box}
+html,body,#root{
+  height:100%;
+  width:100%
+}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans","Helvetica Neue", sans-serif;
+  color:var(--text);
+  background:var(--white);
+}
+
+/* FULL WIDTH container (no max-width cap) */
+.container{
+  width:100%;
+  /* max-width:100%; */
+  margin:0;
+  padding:clamp(12px,2vw,24px);
+}
+
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+
+/* primitives */
+.card{
+  width:100%;
+  background:#fff;
+  border:1px solid #E3EBFF;
+  border-radius:14px;
+  box-shadow:0 6px 22px rgba(10,35,66,.06);
+}
+.primary-btn{
+  background:var(--brand-blue);
+  color:#fff;border:none;border-radius:10px;
+  padding:.85rem 1rem;transition:filter .15s;
+}
+.primary-btn:hover{filter:brightness(1.05)}
+.input{
+  width:100%;
+  padding:.8rem 1rem;
+  border:1px solid #D7E2FF;border-radius:10px;outline:none;
+}
+.input:focus{border-color:var(--brand-blue)}
+.grid{display:grid;gap:1rem}
+.grid-2{grid-template-columns:1fr}
+@media (min-width:900px){.grid-2{grid-template-columns:1fr 1fr}}
+
+.text-center{text-align:center}
+.badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:#E9F6FF;color:var(--brand-blue);
+  padding:.35rem .7rem;border-radius:999px;font-weight:700
+}
+
+/* accent links */
+a,.link{color:var(--brand-blue)}

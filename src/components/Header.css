@@ -1,0 +1,33 @@
+/* Full-bleed header using BESCOM colors */
+.site-header{
+  position:sticky;top:0;z-index:20;
+  width:100%;
+  background:var(--navy);color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  box-shadow: inset 0 3px 0 0 var(--brand-blue); /* thin blue stripe like logo */
+}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.8rem 0; /* side padding comes from .container */
+}
+.brand{display:flex;align-items:center;gap:.75rem;color:#fff}
+.brand-logo{width:42px;height:42px;object-fit:contain}
+.brand-name{font-weight:800;letter-spacing:.2px}
+.nav{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.auth-info{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.auth-links{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.badge{background:#E9F6FF;color:var(--brand-blue)}
+.primary-btn{background:var(--brand-blue)}
+.primary-btn:hover{filter:brightness(1.05)}
+.admin-btn{
+  background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  color:#fff;padding:.5rem 1rem;border-radius:8px;
+  font-weight:600;text-decoration:none;
+  transition:all 0.3s ease;border:none;cursor:pointer;
+  font-size:0.9rem;
+}
+.admin-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(102,126,234,0.4);
+}
+@media (max-width:560px){.brand-name{display:none}}

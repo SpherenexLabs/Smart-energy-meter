@@ -1,0 +1,63 @@
+/* src/styles/plan.css — clearer segmented control + toast */
+.plan-card{padding:1.1rem}
+
+.plan-header{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-bottom:1rem
+}
+.plan-header h3{margin:0;color:var(--navy);font-weight:800}
+
+.segmented{
+  display:inline-flex;
+  border:2px solid #b6c7ff;              /* stronger border */
+  border-radius:14px;
+  overflow:hidden;
+  background:#fff;
+  white-space:nowrap;                     /* keep labels visible */
+}
+.seg-btn{
+  background:#fff;
+  color:var(--navy);                      /* explicit text color */
+  font-weight:700;
+  border:0;
+  padding:.65rem 1.1rem;
+  min-width:132px;
+}
+.seg-btn + .seg-btn{                      /* divider between buttons */
+  border-left:1px solid #d7e2ff;
+}
+.seg-btn.active{
+  background:var(--brand-blue);
+  color:#fff;
+}
+.seg-btn:disabled{
+  opacity:.6;cursor:not-allowed
+}
+
+.plan-placeholder{
+  padding:1rem;border:2px dashed #b6c7ff;border-radius:12px;background:#f6fbff;
+  color:var(--navy)
+}
+
+/* toast at page bottom-right */
+.toast-success{
+  position:fixed;right:16px;bottom:16px;background:#eaffea;border:1px solid #b9efb9;
+  padding:.8rem 1rem;border-radius:12px;color:#0a4a0a;box-shadow:0 6px 22px rgba(0,0,0,.06);z-index:50;
+  animation: slideIn 0.3s ease-out;
+}
+
+.toast-alert{
+  position:fixed;right:16px;bottom:16px;background:#fee;border:2px solid #ef4444;
+  padding:.8rem 1rem;border-radius:12px;color:#991b1b;box-shadow:0 6px 22px rgba(239,68,68,.3);z-index:50;
+  font-weight:600;animation: slideIn 0.3s ease-out, pulse 1s infinite;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(400px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 6px 22px rgba(239,68,68,.3); }
+  50% { box-shadow: 0 6px 28px rgba(239,68,68,.6); }
+}
