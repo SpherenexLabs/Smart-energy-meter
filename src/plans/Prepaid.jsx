@@ -170,7 +170,7 @@
 
 //               {warnOpen && remainingMs > 0 && (
 //                 <div className="alert">
-//                   <div className="alert-title">Only 3 minutes left</div>
+//                   <div className="alert-title">Only few minutes left</div>
 //                   <button className="alert-close" onClick={()=>setWarnOpen(false)} aria-label="Dismiss">✕</button>
 //                 </div>
 //               )}
@@ -410,7 +410,7 @@ export default function Prepaid({ user, db, lockSession, onComplete }) {
 
               {warnOpen && remainingMs > 0 && (
                 <div className="alert">
-                  <div className="alert-title">Only 3 minutes left</div>
+                  <div className="alert-title">Only few minutes left</div>
                   <button
                     className="alert-close"
                     onClick={() => setWarnOpen(false)}
@@ -430,3 +430,4 @@ export default function Prepaid({ user, db, lockSession, onComplete }) {
     </div>
   );
 }
+
