@@ -130,7 +130,7 @@ const Login = ({ onNavigate }) => {
           address: formData.address,
           createdAt: new Date().toISOString(),
           balance: '0',
-          relay: '0',
+          relay: 0,
           voltage: '0.00000'
         };
 

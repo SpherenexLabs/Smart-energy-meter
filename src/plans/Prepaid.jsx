@@ -170,7 +170,7 @@
 
 //               {warnOpen && remainingMs > 0 && (
 //                 <div className="alert">
-//                   <div className="alert-title">Only few minutes left</div>
+//                   <div className="alert-title">Only 3 minutes left</div>
 //                   <button className="alert-close" onClick={()=>setWarnOpen(false)} aria-label="Dismiss">✕</button>
 //                 </div>
 //               )}
@@ -190,7 +190,7 @@
 // src/plans/Prepaid.jsx
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./shared.css";
-import { ref, set, push, serverTimestamp, update } from "firebase/database";
+import { ref, set, push, serverTimestamp, update, onValue } from "firebase/database";
 
 /**
  * Prepaid
@@ -221,6 +221,33 @@ export default function Prepaid({ user, db, lockSession, onComplete }) {
   useEffect(() => {
     setRemainingMs(totalMs);
   }, [totalMs]);
+
+  // Monitor theft detection - disconnect power if theft is detected
+  useEffect(() => {
+    if (!db || phase !== "running") return;
+    
+    const theftRef = ref(db, "Logging/Theft");
+    const unsubscribe = onValue(theftRef, async (snapshot) => {
+      const theftValue = snapshot.val();
+      const isTheft = theftValue === 1 || theftValue === "1";
+      
+      if (isTheft && phase === "running") {
+        // Theft detected - immediately disconnect power
+        clearInterval(intervalRef.current);
+        await set(ref(db, "Logging/Relay"), 0);
+        await update(sessionRef.current, {
+          state: "terminated",
+          reason: "theft_detected",
+          finishedAt: serverTimestamp(),
+        });
+        setPhase("done");
+        setStatusText("⚠️ THEFT DETECTED! Power disconnected for safety.");
+        onComplete?.("Session terminated due to theft detection. Please contact support.");
+      }
+    });
+    
+    return () => unsubscribe();
+  }, [db, phase, onComplete]);
 
   const amount = (Number(minutes) || 0) * 10; // ₹
 
@@ -253,7 +280,7 @@ export default function Prepaid({ user, db, lockSession, onComplete }) {
       realStart: serverTimestamp(),
     });
     // Relay ON
-    await set(ref(db, "Logging/Relay"), "1");
+    await set(ref(db, "Logging/Relay"), 1);
     setPhase("running");
     setStatusText("Power ON. Session started.");
 
@@ -273,7 +300,7 @@ export default function Prepaid({ user, db, lockSession, onComplete }) {
 
   const finishSession = async () => {
     // Relay OFF
-    await set(ref(db, "Logging/Relay"), "0");
+    await set(ref(db, "Logging/Relay"), 0);
     await update(sessionRef.current, {
       state: "completed",
       finishedAt: serverTimestamp(),
@@ -430,4 +457,3 @@ export default function Prepaid({ user, db, lockSession, onComplete }) {
     </div>
   );
 }
-

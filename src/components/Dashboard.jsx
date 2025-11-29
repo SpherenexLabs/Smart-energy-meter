@@ -748,7 +748,7 @@ export default function Dashboard({ user, customerId }) {
         {sensorData ? (
           <div className="sensor-grid">
             {/* Check if relay is ON to show sensor values */}
-            {sensorData.Relay === "1" ? (
+            {sensorData.Relay === 1 ? (
               /* Advanced Analytics Card - Show only when Relay is ON */
               <div className="analytics-card sensor-card">
                 <div className="analytics-header">
@@ -948,8 +948,8 @@ export default function Dashboard({ user, customerId }) {
               <div className="safety-indicators">
                 <div className="safety-item">
                   <span className="safety-label">Relay:</span>
-                  <span className={`relay-status ${sensorData.Relay === "1" ? 'on' : 'off'}`}>
-                    {sensorData.Relay === "1" ? '🟢 ON' : '🔴 OFF'}
+                  <span className={`relay-status ${sensorData.Relay === 1 ? 'on' : 'off'}`}>
+                    {sensorData.Relay === 1 ? '🟢 ON' : '🔴 OFF'}
                   </span>
                 </div>
                 <div className="safety-item">
